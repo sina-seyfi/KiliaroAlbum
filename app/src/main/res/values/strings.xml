@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">KiliaroAlbum</string>
+    <string name="shared_element_album_image_tag">SHARED_ELEMENT_ALBUM_IMAGE_TAG</string>
+    <string name="created_at_placeholder">Created at: %s.</string>
+    <string name="size_placeholder">Size: %s</string>
+</resources>

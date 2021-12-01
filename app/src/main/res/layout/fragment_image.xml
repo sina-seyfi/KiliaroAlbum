@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imageIv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:tag="@string/shared_element_album_image_tag"
+        android:scaleType="centerInside"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <ProgressBar
+        android:id="@+id/imageLoading"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:indeterminate="true"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/detailsTv"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:padding="24dp"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:background="@drawable/thumbnail_layout_overlay_dark_background"
+        android:gravity="start"
+        tools:textColor="@color/white"
+        tools:text="Created at: 2021-11-29. Size: 12 MB"
+        app:layout_constraintBottom_toBottomOf="@id/imageIv" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
