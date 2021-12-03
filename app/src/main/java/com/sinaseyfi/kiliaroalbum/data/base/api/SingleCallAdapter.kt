@@ -1,5 +1,6 @@
 package com.sinaseyfi.kiliaroalbum.data.base.api
 
+import com.sinaseyfi.kiliaroalbum.data.base.ConnectionException
 import retrofit2.Response
 
 class SingleCallAdapter<T>(
@@ -17,14 +18,12 @@ class SingleCallAdapter<T>(
                     ResponseWrapper.Success(response, execute.headers())
                 }
             } else {
-
-                throw Exception()
-
-
+                // We can implement a strategy to manage exceptions and passing it to upper layers.
+                throw ConnectionException()
             }
 
         } catch (exception: Exception) {
-            return ResponseWrapper.Error(exception)
+            return ResponseWrapper.Error(ConnectionException())
         }
     }
 }

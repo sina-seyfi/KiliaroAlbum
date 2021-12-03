@@ -12,16 +12,9 @@ import javax.inject.Inject
 class AlbumApiServiceImpl @Inject constructor()
     : BaseApiService<AlbumEndpoint>(AlbumEndpoint::class.java), AlbumApiService {
 
-    override suspend fun getListMediaInSharedItemFlow(): Flow<Resource<List<AlbumModel>>> = flow {
+    override fun getListMediaInSharedItemFlow(): Flow<Resource<List<AlbumModel>>> = flow {
         emit(Resource.loading())
-        try {
-            emit(Resource.success(apiService.getListMediaInSharedItem(BuildConfig.SHARE_ID)))
-        } catch (e: Exception) {
-            emit(Resource.error(e, null))
-        }
+        emit(execute { apiService.getListMediaInSharedItem(BuildConfig.SHARE_ID) })
     }
-
-    override suspend fun getListMediaInSharedItem(): Resource<List<AlbumModel>> =
-        execute { apiService.getListMediaInSharedItem(BuildConfig.SHARE_ID) }
 
 }

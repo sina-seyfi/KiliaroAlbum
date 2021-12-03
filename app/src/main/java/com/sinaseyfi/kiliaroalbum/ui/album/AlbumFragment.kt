@@ -12,6 +12,8 @@ import com.sinaseyfi.kiliaroalbum.databinding.FragmentAlbumBinding
 import com.sinaseyfi.kiliaroalbum.ui.album.model.Album
 import com.sinaseyfi.kiliaroalbum.ui.base.OnRecyclerItemClickListener
 import com.sinaseyfi.kiliaroalbum.utils.ItemDecorationAlbumColumns
+import com.sinaseyfi.presentation.ui.utils.showGeneralSnackBar
+import com.sinaseyfi.presentation.ui.utils.showToast
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import timber.log.Timber
@@ -61,7 +63,14 @@ class AlbumFragment : BaseFragment<AlbumState, AlbumViewModel, FragmentAlbumBind
 
     }
 
-    override fun renderView(state: AlbumState) {}
+    override fun renderView(state: AlbumState) {
+        if(state.failedToSync) {
+            showToast("Failed to sync data with server")
+        }
+        if(state.isLoading) {
+            showToast("Syncing with server")
+        }
+    }
 
     override fun createViewBinding(layoutInflater: LayoutInflater): FragmentAlbumBinding =
         FragmentAlbumBinding.inflate(layoutInflater)

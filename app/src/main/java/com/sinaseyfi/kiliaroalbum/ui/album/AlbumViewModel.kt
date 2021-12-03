@@ -3,6 +3,7 @@ package com.sinaseyfi.kiliaroalbum.ui.album
 import androidx.lifecycle.viewModelScope
 import com.sinaseyfi.kiliaroalbum.data.album.model.AlbumModel
 import com.sinaseyfi.kiliaroalbum.data.album.repository.AlbumRepository
+import com.sinaseyfi.kiliaroalbum.data.base.ConnectionException
 import com.sinaseyfi.kiliaroalbum.ui.album.model.Album
 import com.sinaseyfi.kiliaroalbum.ui.album.model.AlbumModelMapper
 import com.sinaseyfi.kiliaroalbum.ui.base.BaseViewModel
@@ -12,6 +13,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -26,9 +28,12 @@ class AlbumViewModel @Inject constructor(
     fun fetchAlbums() {
         viewModelScope.launch {
             albumRepository.getListMediaInSharedItem().collect {
-                if(it.status == Status.SUCCESS) {
-                    _albums.value = it.data!!.map { model -> albumModelMapper.mapToUIModel(model) }
-                }
+                _albums.value =
+                    it.data?.map { model -> albumModelMapper.mapToUIModel(model) } ?: emptyList()
+                _viewState.value = AlbumState(
+                    isLoading = it.status == Status.LOADING,
+                    failedToSync = it.status == Status.ERROR && it.error is ConnectionException
+                )
             }
         }
     }

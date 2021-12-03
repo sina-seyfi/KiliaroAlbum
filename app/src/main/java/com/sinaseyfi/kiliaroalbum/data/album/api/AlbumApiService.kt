@@ -6,7 +6,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface AlbumApiService {
 
-    suspend fun getListMediaInSharedItemFlow(): Flow<Resource<List<AlbumModel>>>
-    suspend fun getListMediaInSharedItem(): Resource<List<AlbumModel>>
+    fun getListMediaInSharedItemFlow(): Flow<Resource<List<AlbumModel>>>
 
 }

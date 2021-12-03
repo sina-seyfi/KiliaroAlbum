@@ -1,8 +1,6 @@
 package com.sinaseyfi.kiliaroalbum.utils
 
-import java.lang.Exception
-
-data class Resource<out T>(val status: Status, val data: T?, val message: String?) {
+data class Resource<out T>(val status: Status, val data: T?, val error: Throwable?) {
 
     companion object {
 
@@ -10,8 +8,8 @@ data class Resource<out T>(val status: Status, val data: T?, val message: String
             return Resource(Status.SUCCESS, data, null)
         }
 
-        fun <T> error(error: Exception, data: T?): Resource<T> {
-            return Resource(Status.ERROR, data, error.message)
+        fun <T> error(error: Throwable?, data: T?): Resource<T> {
+            return Resource(Status.ERROR, data, error)
         }
 
         fun <T> loading(): Resource<T> {

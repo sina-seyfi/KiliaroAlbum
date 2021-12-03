@@ -15,4 +15,7 @@ interface AlbumDao {
     @Query("select * from album")
     fun getAll(): Flow<List<AlbumTable>>
 
+    @Query("delete from album")
+    suspend fun clearAll()
+
 }

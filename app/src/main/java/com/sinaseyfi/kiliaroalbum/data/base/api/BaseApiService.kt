@@ -16,11 +16,12 @@ abstract class BaseApiService<S> constructor(private val serviceClass: Class<S>)
         create()
     }
 
-    protected suspend fun <T> execute(apiCall: suspend () -> T): Resource<T> =
-        try {
-            Resource.success(apiCall.invoke())
-        } catch (e: Exception) {
-            Resource.error(e, null)
+    protected suspend fun <T> execute(apiCall: suspend () -> Response<T>): Resource<T> =
+        when(val adapter = SingleCallAdapter(apiCall).execute()) {
+            is ResponseWrapper.Success -> Resource.success(adapter.data)
+            is ResponseWrapper.Error -> Resource.error(adapter.exception, null)
+            is ResponseWrapper.Complete -> Resource.success(null)
+            else -> throw IllegalStateException()
         }
 
     protected suspend fun <T> executionWithMessage(apiCall: suspend () -> Response<T>): Result<T> {
