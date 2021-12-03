@@ -13,10 +13,10 @@ class AlbumSharedPreferences @Inject constructor(
         private const val ALBUM_LIST_TIMESTAMP_LABEL = "album_list_timestamp_label"
     }
 
-    fun lastUpdatedDb(): Long =
+    suspend fun lastUpdatedDb(): Long =
         sharedPreferences.getLong(ALBUM_LIST_TIMESTAMP_LABEL, 0L)
 
-    fun dbUpdatedOn(timestamp: Long) {
+    suspend fun dbUpdatedOn(timestamp: Long) {
         sharedPreferences.edit().putLong(ALBUM_LIST_TIMESTAMP_LABEL, timestamp).apply()
     }
 
