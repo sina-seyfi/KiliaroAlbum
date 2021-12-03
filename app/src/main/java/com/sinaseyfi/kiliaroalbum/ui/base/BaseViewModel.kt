@@ -1,3 +1,5 @@
+@file:Suppress("PropertyName")
+
 package com.sinaseyfi.kiliaroalbum.ui.base
 
 import androidx.lifecycle.ViewModel

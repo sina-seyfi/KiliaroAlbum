@@ -1,9 +1,9 @@
 package com.sinaseyfi.kiliaroalbum.utils
 
-import android.text.format.DateUtils
-import net.time4j.*
+import net.time4j.PlainTimestamp
+import net.time4j.TemporalType
 
 
-fun DateUtils.nowTimestamp(): Long {
+fun nowTimestamp(): Long {
     return TemporalType.MILLIS_SINCE_UNIX.from(PlainTimestamp.nowInSystemTime().atUTC())
 }

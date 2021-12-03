@@ -25,7 +25,7 @@ abstract class BaseFragment<V : ViewState, T : BaseViewModel<V>, B : ViewBinding
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         super.onCreateView(inflater, container, savedInstanceState)
         _viewBinding = createViewBinding(inflater)
         return viewBinding.root

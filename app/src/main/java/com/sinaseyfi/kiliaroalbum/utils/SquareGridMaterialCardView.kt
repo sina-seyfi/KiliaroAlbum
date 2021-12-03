@@ -2,11 +2,12 @@ package com.sinaseyfi.kiliaroalbum.utils
 
 import android.content.Context
 import android.util.AttributeSet
-import androidx.constraintlayout.widget.ConstraintLayout
+import com.google.android.material.card.MaterialCardView
 
-class SquareGridConstraintLayout @JvmOverloads constructor(
+// This will make card view square by its width
+class SquareGridMaterialCardView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null
-) : ConstraintLayout(context, attrs) {
+) : MaterialCardView(context, attrs) {
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, widthMeasureSpec)

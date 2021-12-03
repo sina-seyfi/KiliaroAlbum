@@ -6,7 +6,6 @@ import com.sinaseyfi.kiliaroalbum.data.base.api.BaseApiService
 import com.sinaseyfi.kiliaroalbum.utils.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import java.lang.Exception
 import javax.inject.Inject
 
 class AlbumApiServiceImpl @Inject constructor()

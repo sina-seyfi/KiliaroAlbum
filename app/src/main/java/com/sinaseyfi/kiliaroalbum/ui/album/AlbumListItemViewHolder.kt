@@ -4,7 +4,7 @@ import com.sinaseyfi.kiliaroalbum.databinding.LayoutAlbumListItemBinding
 import com.sinaseyfi.kiliaroalbum.ui.album.model.Album
 import com.sinaseyfi.kiliaroalbum.ui.base.BaseViewHolder
 import com.sinaseyfi.kiliaroalbum.utils.humanReadableByteCountBin
-import com.sinaseyfi.presentation.ui.utils.loadFromUrl
+import com.sinaseyfi.kiliaroalbum.utils.loadFromUrl
 
 class AlbumListItemViewHolder(
     private val viewBinding: LayoutAlbumListItemBinding

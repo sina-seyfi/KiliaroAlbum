@@ -3,7 +3,6 @@ package com.sinaseyfi.kiliaroalbum.data.base.api
 import com.sinaseyfi.kiliaroalbum.utils.Resource
 import retrofit2.Response
 import retrofit2.Retrofit
-import java.lang.Exception
 import javax.inject.Inject
 
 abstract class BaseApiService<S> constructor(private val serviceClass: Class<S>) :

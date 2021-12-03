@@ -1,19 +1,16 @@
 package com.sinaseyfi.kiliaroalbum.ui.album
 
-import androidx.lifecycle.viewModelScope
-import com.sinaseyfi.kiliaroalbum.data.album.model.AlbumModel
 import com.sinaseyfi.kiliaroalbum.data.album.repository.AlbumRepository
 import com.sinaseyfi.kiliaroalbum.data.base.ConnectionException
 import com.sinaseyfi.kiliaroalbum.ui.album.model.Album
 import com.sinaseyfi.kiliaroalbum.ui.album.model.AlbumModelMapper
 import com.sinaseyfi.kiliaroalbum.ui.base.BaseViewModel
 import com.sinaseyfi.kiliaroalbum.utils.Status
+import com.sinaseyfi.kiliaroalbum.utils.launch
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -26,7 +23,7 @@ class AlbumViewModel @Inject constructor(
     val albums: StateFlow<List<Album>> = _albums
 
     fun fetchAlbums() {
-        viewModelScope.launch {
+        launch {
             albumRepository.getListMediaInSharedItem().collect {
                 _albums.value =
                     it.data?.map { model -> albumModelMapper.mapToUIModel(model) } ?: emptyList()

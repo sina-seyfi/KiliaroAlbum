@@ -20,7 +20,7 @@ abstract class BaseAdapter<Model: RecyclerItemModel<*>>(
         /*
         Diff utils is automatically set to handler changes in the list
          */
-        val diffUtil: DiffUtil.ItemCallback<Model> = object: DiffUtil.ItemCallback<Model>() {
+        diffUtil: DiffUtil.ItemCallback<Model> = object: DiffUtil.ItemCallback<Model>() {
             override fun areItemsTheSame(oldItem: Model, newItem: Model): Boolean =
                 oldItem.provideId() == newItem.provideId()
             @SuppressLint("DiffUtilEquals")

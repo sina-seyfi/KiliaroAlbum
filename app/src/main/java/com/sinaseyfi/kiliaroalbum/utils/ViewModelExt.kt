@@ -1,4 +1,4 @@
-package com.sinaseyfi.presentation.ui.utils
+package com.sinaseyfi.kiliaroalbum.utils
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

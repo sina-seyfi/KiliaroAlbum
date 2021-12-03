@@ -2,9 +2,10 @@ package com.sinaseyfi.kiliaroalbum.utils
 
 import java.text.CharacterIterator
 import java.text.StringCharacterIterator
+import kotlin.math.abs
 
 fun humanReadableByteCountBin(bytes: Long): String {
-    val absB = if (bytes == Long.MIN_VALUE) Long.MAX_VALUE else Math.abs(bytes)
+    val absB = if (bytes == Long.MIN_VALUE) Long.MAX_VALUE else abs(bytes)
     if (absB < 1024) {
         return "$bytes B"
     }

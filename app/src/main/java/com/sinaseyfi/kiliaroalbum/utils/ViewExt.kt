@@ -1,4 +1,6 @@
-package com.sinaseyfi.presentation.ui.utils
+@file:Suppress("ControlFlowWithEmptyBody")
+
+package com.sinaseyfi.kiliaroalbum.utils
 
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
@@ -66,13 +68,6 @@ fun List<View?>.setEnabled(enabled: Boolean) {
     forEach { view -> view?.isEnabled = enabled }
 }
 
-fun View.getNavigationBarHeight(): Int {
-    val resourceId = resources.getIdentifier("navigation_bar_height", "dimen", "android")
-    return if (resourceId > 0) {
-        resources.getDimensionPixelSize(resourceId)
-    } else 0
-}
-
 fun List<View?>.animate(chain: ViewPropertyAnimator.() -> Unit) {
     this.forEach { view -> view?.animate()?.chain() }
 }
@@ -114,10 +109,10 @@ fun ImageView?.loadFromUrl(
                     }
                 )
             } catch (e: Exception) {
-
+                // This is for when we want to do something with error placeholder
             }
         } else {
-
+            // If the url is null, do something else.
         }
     }
 }

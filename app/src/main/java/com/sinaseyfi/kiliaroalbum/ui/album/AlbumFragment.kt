@@ -1,23 +1,17 @@
 package com.sinaseyfi.kiliaroalbum.ui.album
 
 import android.view.LayoutInflater
-import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.sinaseyfi.kiliaroalbum.R
 import com.sinaseyfi.kiliaroalbum.ui.base.BaseFragment
 import com.sinaseyfi.kiliaroalbum.databinding.FragmentAlbumBinding
 import com.sinaseyfi.kiliaroalbum.ui.album.model.Album
 import com.sinaseyfi.kiliaroalbum.ui.base.OnRecyclerItemClickListener
-import com.sinaseyfi.kiliaroalbum.utils.ItemDecorationAlbumColumns
-import com.sinaseyfi.presentation.ui.utils.showGeneralSnackBar
-import com.sinaseyfi.presentation.ui.utils.showToast
+import com.sinaseyfi.kiliaroalbum.utils.showToast
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
-import timber.log.Timber
-import java.lang.Exception
 
 @AndroidEntryPoint
 class AlbumFragment : BaseFragment<AlbumState, AlbumViewModel, FragmentAlbumBinding>() {

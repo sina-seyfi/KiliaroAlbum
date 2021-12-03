@@ -17,7 +17,7 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
 
         init {
             AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
     }
 

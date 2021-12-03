@@ -1,6 +1,5 @@
 package com.sinaseyfi.kiliaroalbum.data.base.database
 
-internal const val SHARED_KEY = "shared_key"
 internal const val ID = "id"
 internal const val USER_ID = "user_id"
 internal const val MEDIA_TYPE = "media_type"

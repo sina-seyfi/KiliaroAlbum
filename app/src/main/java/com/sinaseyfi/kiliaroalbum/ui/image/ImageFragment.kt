@@ -8,8 +8,8 @@ import com.sinaseyfi.kiliaroalbum.databinding.FragmentImageBinding
 import com.sinaseyfi.kiliaroalbum.ui.album.model.Album
 import com.sinaseyfi.kiliaroalbum.ui.base.BaseFragment
 import com.sinaseyfi.kiliaroalbum.utils.humanReadableByteCountBin
-import com.sinaseyfi.presentation.ui.utils.loadFromUrl
-import com.sinaseyfi.presentation.ui.utils.setVisibility
+import com.sinaseyfi.kiliaroalbum.utils.loadFromUrl
+import com.sinaseyfi.kiliaroalbum.utils.setVisibility
 
 class ImageFragment: BaseFragment<ImageState, ImageViewModel, FragmentImageBinding>() {
 

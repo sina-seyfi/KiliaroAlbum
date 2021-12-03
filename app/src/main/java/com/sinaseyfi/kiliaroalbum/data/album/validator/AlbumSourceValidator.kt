@@ -1,11 +1,9 @@
 package com.sinaseyfi.kiliaroalbum.data.album.validator
 
-import android.text.format.DateUtils
 import com.sinaseyfi.kiliaroalbum.data.album.database.AlbumTable
 import com.sinaseyfi.kiliaroalbum.data.album.preferences.AlbumSharedPreferences
 import com.sinaseyfi.kiliaroalbum.data.base.SourceValidator
 import com.sinaseyfi.kiliaroalbum.utils.nowTimestamp
-import timber.log.Timber
 import javax.inject.Inject
 import kotlin.math.abs
 
@@ -18,10 +16,10 @@ class AlbumSourceValidator @Inject constructor(
     }
 
     override suspend fun isValid(): Boolean =
-        abs((albumSharedPreferences.lastUpdatedDb() - DateUtils().nowTimestamp())) < UPDATE_OFFSET_VALID
+        abs((albumSharedPreferences.lastUpdatedDb() - nowTimestamp())) < UPDATE_OFFSET_VALID
 
     override suspend fun updated(source: List<AlbumTable>?) {
-        albumSharedPreferences.dbUpdatedOn(DateUtils().nowTimestamp())
+        albumSharedPreferences.dbUpdatedOn(nowTimestamp())
     }
 
 }
