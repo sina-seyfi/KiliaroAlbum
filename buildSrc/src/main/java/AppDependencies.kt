@@ -1,5 +1,4 @@
 object AppVersions {
-    const val multiDexVersion = "2.0.1"
     const val logInterceptorVersion = "4.9.1"
     const val timberVersion = "4.7.1"
     const val javaxInjectVersion = "1"
@@ -77,8 +76,6 @@ object CoreDependencies {
 
     const val glideCompiler = "com.github.bumptech.glide:compiler:${AppVersions.glideVersion}"
 
-    private const val multiDex = "androidx.multidex:multidex:${AppVersions.multiDexVersion}"
-
     private const val logInterceptor =
         "com.squareup.okhttp3:logging-interceptor:${AppVersions.logInterceptorVersion}"
 
@@ -117,7 +114,6 @@ object CoreDependencies {
         Pair(DependencyConfiguration.IMPLEMENTATION, javaxInject),
         Pair(DependencyConfiguration.DEBUG_IMPLEMENTATION, leakCanary),
         Pair(DependencyConfiguration.IMPLEMENTATION, coroutines),
-        Pair(DependencyConfiguration.IMPLEMENTATION, multiDex),
         Pair(DependencyConfiguration.IMPLEMENTATION, timber),
         Pair(DependencyConfiguration.IMPLEMENTATION, time4A),
         // UI Dependencies

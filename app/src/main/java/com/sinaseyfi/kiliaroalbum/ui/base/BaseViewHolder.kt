@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.res.Resources
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
+import java.util.Observable
 import kotlin.properties.Delegates
 
 abstract class BaseViewHolder<Model: RecyclerItemModel<*>>(viewBinding: ViewBinding) :

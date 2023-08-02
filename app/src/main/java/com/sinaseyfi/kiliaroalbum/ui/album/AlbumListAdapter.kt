@@ -10,7 +10,7 @@ import com.sinaseyfi.kiliaroalbum.utils.layoutInflater
 
 class AlbumListAdapter(
     onRecyclerItemClickListener: OnRecyclerItemClickListener<Album>
-): BaseAdapter<Album>(alwaysUpdateOnSubmit = true, onRecyclerItemClickListener = onRecyclerItemClickListener) {
+): BaseAdapter<Album>(onRecyclerItemClickListener = onRecyclerItemClickListener) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<Album> =
         AlbumListItemViewHolder(
             LayoutAlbumListItemBinding.inflate(
@@ -18,9 +18,6 @@ class AlbumListAdapter(
                 parent,
                 false
             )
-        ).apply {
-            itemView.apply {
-                
-            }
-        }
+        )
+
 }

@@ -9,6 +9,3 @@ import kotlinx.coroutines.launch
 
 fun ViewModel.launch(block: suspend () -> Unit): Job =
     viewModelScope.launch { block.invoke() }
-
-fun <T> ViewModel.async(block: suspend () -> T): Deferred<T> =
-    viewModelScope.async { block.invoke() }
