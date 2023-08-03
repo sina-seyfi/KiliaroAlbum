@@ -8,13 +8,12 @@ import com.sinaseyfi.kiliaroalbum.ui.base.BaseViewHolder
 import com.sinaseyfi.kiliaroalbum.utils.humanReadableByteCountBin
 import com.sinaseyfi.kiliaroalbum.utils.loadFromUrl
 import timber.log.Timber
-import kotlin.properties.Delegates
 
 class AlbumListItemViewHolder(
     private val viewBinding: LayoutAlbumListItemBinding
 ): BaseViewHolder<Album>(viewBinding) {
 
-    // To store previously loaded ViewTarget and canceling it when detached
+    // To store previously loaded ViewTarget and canceling it when detached and release resources
     private var target: Target<*>? = null
     override fun bind(model: Album) {
         viewBinding.apply {
@@ -30,10 +29,6 @@ class AlbumListItemViewHolder(
         Glide.with(context).clear(target)
         Timber.i("On View Detached from window")
         target = null
-    }
-
-    override fun onViewAttachedToWindow() {
-        // TODO Do some resetting to default values
     }
 
 }
