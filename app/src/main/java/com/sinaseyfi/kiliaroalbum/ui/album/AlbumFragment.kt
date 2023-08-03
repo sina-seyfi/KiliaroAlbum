@@ -2,7 +2,6 @@ package com.sinaseyfi.kiliaroalbum.ui.album
 
 import android.view.LayoutInflater
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sinaseyfi.kiliaroalbum.ui.base.BaseFragment
@@ -11,7 +10,6 @@ import com.sinaseyfi.kiliaroalbum.ui.album.model.Album
 import com.sinaseyfi.kiliaroalbum.ui.base.OnRecyclerItemClickListener
 import com.sinaseyfi.kiliaroalbum.utils.showToast
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class AlbumFragment : BaseFragment<AlbumState, AlbumViewModel, FragmentAlbumBinding>() {
@@ -39,11 +37,6 @@ class AlbumFragment : BaseFragment<AlbumState, AlbumViewModel, FragmentAlbumBind
                 adapter = albumListAdapter
             }
         }
-        viewLifecycleOwner.lifecycleScope.launchWhenResumed {
-            viewModel.albums.collect { list ->
-                albumListAdapter.submitList(list)
-            }
-        }
         viewModel.fetchAlbums()
     }
 
@@ -58,11 +51,20 @@ class AlbumFragment : BaseFragment<AlbumState, AlbumViewModel, FragmentAlbumBind
     }
 
     override fun renderView(state: AlbumState) {
-        if(state.failedToSync) {
-            showToast("Failed to sync data with server")
-        }
-        if(state.isLoading) {
-            showToast("Syncing with server")
+        when(state) {
+            is AlbumState.AlbumError -> {
+                if(state.failedToSync) {
+                    showToast("Failed to sync data with server")
+                } else {
+                    showToast("Some error happened!")
+                }
+            }
+            AlbumState.AlbumLoading -> {
+                showToast("Syncing with server")
+            }
+            is AlbumState.AlbumSuccessfullyLoaded -> {
+                albumListAdapter.submitList(state.albums)
+            }
         }
     }
 

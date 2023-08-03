@@ -2,6 +2,8 @@ package com.sinaseyfi.kiliaroalbum.ui.image
 
 import com.sinaseyfi.kiliaroalbum.ui.base.ViewState
 
-data class ImageState(
-    override val isLoading: Boolean = false
-) : ViewState
+sealed class ImageState: ViewState {
+    object ImageLoading: ImageState()
+    object ImageError: ImageState()
+    object ImageLoaded: ImageState()
+}

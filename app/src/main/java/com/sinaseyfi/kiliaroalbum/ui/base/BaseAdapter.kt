@@ -7,16 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 abstract class BaseAdapter<Model: RecyclerItemModel<*>>(
     dataList: MutableList<Model>? = null,
         // This is the listener for handling click of each item
-    var onRecyclerItemClickListener: OnRecyclerItemClickListener<Model>? = null,
-        // This is the listener for handling click of nested recycler view item
-    var onNestedItemClickListener: OnNestedItemClickListener? = null,
-        /*
-        This flag will make the adapter to update the list even if it's not changed in data
-        This is very useful if your data is not changed, but you want to update your list,
-        To change the content of some items
-        (See the usages)
-         */
-        val alwaysUpdateOnSubmit: Boolean = false,
+        val onRecyclerItemClickListener: OnRecyclerItemClickListener<Model>? = null,
         /*
         Diff utils is automatically set to handler changes in the list
          */
@@ -25,8 +16,7 @@ abstract class BaseAdapter<Model: RecyclerItemModel<*>>(
                 oldItem.provideId() == newItem.provideId()
             @SuppressLint("DiffUtilEquals")
             override fun areContentsTheSame(oldItem: Model, newItem: Model): Boolean =
-                if(alwaysUpdateOnSubmit) false
-                else oldItem == newItem
+                oldItem == newItem
         }
 ): ListAdapter<Model, BaseViewHolder<Model>>(diffUtil) {
 
@@ -34,7 +24,6 @@ abstract class BaseAdapter<Model: RecyclerItemModel<*>>(
 
     override fun onBindViewHolder(holder: BaseViewHolder<Model>, position: Int) {
         holder.onRecyclerItemClickListener = onRecyclerItemClickListener
-        holder.onNestedItemClickListener = onNestedItemClickListener
         holder.bind(getItem(position))
     }
 

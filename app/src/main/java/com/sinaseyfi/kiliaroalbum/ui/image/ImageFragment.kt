@@ -19,16 +19,12 @@ class ImageFragment: BaseFragment<ImageState, ImageViewModel, FragmentImageBindi
 
     override fun init() {
         super.init()
+        viewModel.setImageIsLoading()
         viewBinding.apply {
-            imageLoading.setVisibility(true)
-            detailsTv.setVisibility(false)
             imageIv.loadFromUrl(
                 args.album.downloadUrl,
-                error = { imageLoading.setVisibility(false) },
-                success = {
-                    imageLoading.setVisibility(false)
-                    detailsTv.setVisibility(true)
-                }
+                error = { viewModel.setImageFailedToLoad() },
+                success = { viewModel.setImageLoaded() }
             )
             detailsTv.text = detailsTextProvider(args.album)
         }
@@ -38,6 +34,23 @@ class ImageFragment: BaseFragment<ImageState, ImageViewModel, FragmentImageBindi
         "${getString(R.string.created_at_placeholder, album.createdAt)}\n${getString(R.string.size_placeholder, humanReadableByteCountBin(album.size.toLong()))}"
 
     override fun renderView(state: ImageState) {
+        when(state) {
+            ImageState.ImageError -> {
+                viewBinding.imageLoading.setVisibility(false)
+            }
+            ImageState.ImageLoaded -> {
+                viewBinding.apply {
+                    imageLoading.setVisibility(false)
+                    detailsTv.setVisibility(true)
+                }
+            }
+            ImageState.ImageLoading -> {
+                viewBinding.apply {
+                    imageLoading.setVisibility(true)
+                    detailsTv.setVisibility(false)
+                }
+            }
+        }
     }
 
     override fun createViewBinding(layoutInflater: LayoutInflater): FragmentImageBinding =

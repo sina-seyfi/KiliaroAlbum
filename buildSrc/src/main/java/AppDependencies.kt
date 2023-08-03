@@ -1,5 +1,4 @@
 object AppVersions {
-    const val multiDexVersion = "2.0.1"
     const val logInterceptorVersion = "4.9.1"
     const val timberVersion = "4.7.1"
     const val javaxInjectVersion = "1"
@@ -77,8 +76,6 @@ object CoreDependencies {
 
     const val glideCompiler = "com.github.bumptech.glide:compiler:${AppVersions.glideVersion}"
 
-    private const val multiDex = "androidx.multidex:multidex:${AppVersions.multiDexVersion}"
-
     private const val logInterceptor =
         "com.squareup.okhttp3:logging-interceptor:${AppVersions.logInterceptorVersion}"
 
@@ -113,44 +110,43 @@ object CoreDependencies {
 
     val dependencyNotation = arrayOf(
         // Base Dependencies
-        Pair(DependencyConfiguration.IMPLEMENTATION, kotlinConfig),
-        Pair(DependencyConfiguration.IMPLEMENTATION, javaxInject),
-        Pair(DependencyConfiguration.DEBUG_IMPLEMENTATION, leakCanary),
-        Pair(DependencyConfiguration.IMPLEMENTATION, coroutines),
-        Pair(DependencyConfiguration.IMPLEMENTATION, multiDex),
-        Pair(DependencyConfiguration.IMPLEMENTATION, timber),
-        Pair(DependencyConfiguration.IMPLEMENTATION, time4A),
+        Pair("implementation", kotlinConfig),
+        Pair("implementation", javaxInject),
+        Pair("debugImplementation", leakCanary),
+        Pair("implementation", coroutines),
+        Pair("implementation", timber),
+        Pair("implementation", time4A),
         // UI Dependencies
-        Pair(DependencyConfiguration.IMPLEMENTATION, core),
-        Pair(DependencyConfiguration.IMPLEMENTATION, appCompat),
-        Pair(DependencyConfiguration.IMPLEMENTATION, material),
-        Pair(DependencyConfiguration.IMPLEMENTATION, activity),
-        Pair(DependencyConfiguration.IMPLEMENTATION, fragment),
-        Pair(DependencyConfiguration.IMPLEMENTATION, navigationFragment),
-        Pair(DependencyConfiguration.IMPLEMENTATION, navigationUi),
-        Pair(DependencyConfiguration.IMPLEMENTATION, glide),
-        Pair(DependencyConfiguration.ANNOTATION_PROCESSING, glideCompiler),
-        Pair(DependencyConfiguration.IMPLEMENTATION, glideOkHttpIntegration),
-        Pair(DependencyConfiguration.IMPLEMENTATION, constraintLayout),
-        Pair(DependencyConfiguration.IMPLEMENTATION, lottie),
+        Pair("implementation", core),
+        Pair("implementation", appCompat),
+        Pair("implementation", material),
+        Pair("implementation", activity),
+        Pair("implementation", fragment),
+        Pair("implementation", navigationFragment),
+        Pair("implementation", navigationUi),
+        Pair("implementation", glide),
+        Pair("kapt", glideCompiler),
+        Pair("implementation", glideOkHttpIntegration),
+        Pair("implementation", constraintLayout),
+        Pair("implementation", lottie),
         // DI Dependencies
-        Pair(DependencyConfiguration.IMPLEMENTATION, hiltAndroid),
-        Pair(DependencyConfiguration.ANNOTATION_PROCESSING, hiltCompiler),
-        Pair(DependencyConfiguration.IMPLEMENTATION, hiltNavigationFragment),
+        Pair("implementation", hiltAndroid),
+        Pair("kapt", hiltCompiler),
+        Pair("implementation", hiltNavigationFragment),
         // Database Dependencies
-        Pair(DependencyConfiguration.IMPLEMENTATION, room),
-        Pair(DependencyConfiguration.IMPLEMENTATION, roomKotlin),
-        Pair(DependencyConfiguration.ANNOTATION_PROCESSING, roomAnnotation),
+        Pair("implementation", room),
+        Pair("implementation", roomKotlin),
+        Pair("kapt", roomAnnotation),
         // Lifecycle Dependencies
-        Pair(DependencyConfiguration.IMPLEMENTATION, lifecycleViewModel),
-        Pair(DependencyConfiguration.IMPLEMENTATION, lifecycleLiveData),
-        Pair(DependencyConfiguration.IMPLEMENTATION, lifecycleRuntime),
+        Pair("implementation", lifecycleViewModel),
+        Pair("implementation", lifecycleLiveData),
+        Pair("implementation", lifecycleRuntime),
         // Remote Dependencies
-        Pair(DependencyConfiguration.IMPLEMENTATION, okHttp),
-        Pair(DependencyConfiguration.IMPLEMENTATION, retrofit),
-        Pair(DependencyConfiguration.IMPLEMENTATION, gson),
-        Pair(DependencyConfiguration.IMPLEMENTATION, retrofitConverter),
-        Pair(DependencyConfigurationBuilder(BuildTypes.Debug, Flavors.Develop).IMPLEMENTATION, logInterceptor),
+        Pair("implementation", okHttp),
+        Pair("implementation", retrofit),
+        Pair("implementation", gson),
+        Pair("implementation", retrofitConverter),
+        Pair("developImplementation", logInterceptor),
     )
 
 }

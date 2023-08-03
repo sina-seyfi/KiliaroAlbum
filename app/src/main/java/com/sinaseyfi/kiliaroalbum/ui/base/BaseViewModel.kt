@@ -12,7 +12,11 @@ abstract class BaseViewModel<V : ViewState>(
 ) : ViewModel()
 {
     
-    protected val _viewState = MutableStateFlow(initViewState)
+    private val _viewState = MutableStateFlow(initViewState)
     val viewState: StateFlow<V> = _viewState
+
+    protected fun setViewState(value: V) {
+        _viewState.value = value
+    }
 
 }

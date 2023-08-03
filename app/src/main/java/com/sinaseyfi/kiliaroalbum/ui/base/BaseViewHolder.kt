@@ -10,7 +10,6 @@ abstract class BaseViewHolder<Model: RecyclerItemModel<*>>(viewBinding: ViewBind
         RecyclerView.ViewHolder(viewBinding.root) {
 
     var onRecyclerItemClickListener: OnRecyclerItemClickListener<Model>? = null
-    var onNestedItemClickListener: OnNestedItemClickListener? = null
     var attachedToWindow: Boolean by Delegates.observable(false) { _, oldValue, newValue ->
         if(oldValue != newValue) {
             if(newValue)    onViewAttachedToWindow()

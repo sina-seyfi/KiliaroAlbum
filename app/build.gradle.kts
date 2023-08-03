@@ -15,23 +15,22 @@ android {
         targetSdk = Configuration.targetSdkVersion
         versionCode = Configuration.versionCode
         versionName = Configuration.versionName
-        multiDexEnabled = true
 //        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
-        getByName(BuildTypes.Debug.name) {
-            this.isMinifyEnabled = BuildTypes.Debug.isMinifyEnabled
-            this.isShrinkResources = BuildTypes.Debug.isShrinkResources
-            this.isDebuggable = BuildTypes.Debug.isDebuggable
+        getByName("debug") {
+            this.isMinifyEnabled = false
+            this.isShrinkResources = false
+            this.isDebuggable = true
         }
-        getByName(BuildTypes.Release.name) {
-            this.isMinifyEnabled = BuildTypes.Release.isMinifyEnabled
-            this.isShrinkResources = BuildTypes.Release.isShrinkResources
-            this.isDebuggable = BuildTypes.Release.isDebuggable
+        getByName("release") {
+            this.isMinifyEnabled = true
+            this.isShrinkResources = true
+            this.isDebuggable = false
             this.proguardFiles(
                     getDefaultProguardFile("proguard-android-optimize.txt"),
-                    *BuildTypes.Release.proguardFiles
+                    "proguard-rules.pro"
             )
         }
     }
@@ -55,27 +54,21 @@ android {
     }
 
     flavorDimensions.apply {
-        addAll(Flavors.dimensions)
+        add("base")
     }
 
     productFlavors {
-        Flavors.flavors.forEach { flavor ->
-            this.register(flavor.name) {
-                manifestPlaceholders.putAll(flavor.manifestPlaceholder)
-                dimension = flavor.dimension
-                if(flavor.applicationIdSuffix.isNotEmpty()) {
-                    this.applicationIdSuffix = flavor.applicationIdSuffix
-                }
-                flavor.configs.forEach { config ->
-                    this.buildConfigField(
-                            config.first, config.second,
-                    if (config.first == "String") {
-                        "\"${config.third}\""
-                    } else {
-                        config.third
-                    }
-                    )
-                }
+        this.register("develop") {
+            manifestPlaceholders.putAll(mapOf("app_name" to "${Configuration.appName} - develop"))
+            dimension = "base"
+            this.applicationIdSuffix = "dev"
+            listOf(
+                Triple("String", "API_BASE_URL", "https://api1.kiliaro.com/"),
+                Triple("String", "SHARE_ID", "djlCbGusTJamg_ca4axEVw"),
+                Triple("int", "DATABASE_VERSION", "1"),
+                Triple("String", "SCHEMA_NAME", "kiliaro_db")
+            ).forEach {
+                this.buildConfigField(it.first, it.second, if(it.first == "String") "\"${it.third}\"" else it.third)
             }
         }
     }
@@ -84,10 +77,8 @@ android {
         this.flavors.forEach {
             val flavorName = it.name
             val buildType = this.buildType.name
-            if(Flavors.flavors.any { flavor -> flavor.name == flavorName }) {
-                val flavor = Flavors.flavors.first { flavor -> flavor.name == flavorName }
-                ignore = (buildType !in List(flavor.supportedBuildTypes.size) { index -> flavor.supportedBuildTypes[index].name })
-            }
+            if(flavorName == "develop" && buildType == "release")
+                ignore = true
         }
     }
 
